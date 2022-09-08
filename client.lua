@@ -51,13 +51,18 @@ function rotate(bone)
       DisableControlAction(0, 173, true) -- ARROW DOWN - X DOWN
       DisableControlAction(0, 174, true) -- ARROW LEFT - Y UP
       DisableControlAction(0, 175, true) -- ARROW RIGHT - Y DOWN
-      DisableControlAction(0, 21, true) -- 	LEFT SHIFT
       DisableControlAction(0, 15, true) -- SCROLLWHEEL UP
       DisableControlAction(0, 14, true) -- SCROLLWHEEL DOWN
       DisableControlAction(0, 159, true) -- NUM 6
       DisableControlAction(0, 161, true) -- NUM 7
       DisableControlAction(0, 162, true) -- NUM 8
       DisableControlAction(0, 163, true) -- NUM 9
+
+      speed = 0.01
+      DisableControlAction(0, 21, true) -- 	LEFT SHIFT
+      if IsDisabledControlPressed(0, 21) then -- SHIFT hold down
+        speed = 0.10
+      end
 
       var = 5.00
       DisableControlAction(0, 36, true)
@@ -66,46 +71,37 @@ function rotate(bone)
       end
 
       if IsDisabledControlJustPressed(0, 172) then -- UP
-        x = x - 0.01
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
+        x = x - speed
         print(x)
       elseif IsDisabledControlJustPressed(0, 173) then -- DOWN
-        x = x + 0.01
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
+        x = x + speed
         print(x)
       elseif IsDisabledControlJustPressed(0, 174) then -- LEFT
-        y = y + 0.01
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
+        y = y + speed
         print(y)
       elseif IsDisabledControlJustPressed(0, 175) then -- RIGHT
-        y = y - 0.01
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
+        y = y - speed
         print(y)
       elseif IsDisabledControlJustPressed(0, 15) then -- SCROLLWHEEL UP
         rotX = rotX - var
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
         print(rotX)
       elseif IsDisabledControlJustPressed(0, 14) then -- SCROLLWHEEL DOWN
         rotX = rotX + var
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
         print(rotX)
       elseif IsDisabledControlJustPressed(0, 159) then -- NUM 6
         rotZ = rotZ - var
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
         print(rotZ)
       elseif IsDisabledControlJustPressed(0, 161) then -- NUM 7
         rotZ = rotZ + var
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
         print(rotZ)
       elseif IsDisabledControlJustPressed(0, 162) then -- NUM 8
         rotY = rotY - var
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
         print(rotY)
       elseif IsDisabledControlJustPressed(0, 163) then -- NUM 9
         rotY = rotY + var
-        AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
         print(rotY)
       end
+      AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), bone), x, y, z, rotX, rotY, rotZ, true, true, false, true, 1, true)
 
     end
   end)
