@@ -57,6 +57,8 @@ function rotate(bone)
       DisableControlAction(0, 161, true) -- NUM 7
       DisableControlAction(0, 162, true) -- NUM 8
       DisableControlAction(0, 163, true) -- NUM 9
+      DisableControlAction(0, 244, true) -- NUM M
+      DisableControlAction(0, 306, true) -- NUM N
 
       speed = 0.01
       DisableControlAction(0, 21, true) -- 	LEFT SHIFT
@@ -82,6 +84,12 @@ function rotate(bone)
       elseif IsDisabledControlJustPressed(0, 175) then -- RIGHT
         y = y - speed
         print(y)
+      elseif IsDisabledControlJustPressed(0, 244) then -- UP
+        z = z + speed
+        print(z)
+      elseif IsDisabledControlJustPressed(0, 306) then -- DOWN
+        z = z - speed
+        print(z)
       elseif IsDisabledControlJustPressed(0, 15) then -- SCROLLWHEEL UP
         rotX = rotX - var
         print(rotX)
@@ -186,8 +194,6 @@ RegisterCommand('prop', function(src, args)
 
   if #args >= 2 then 
       bone = args[2]
-  else
-      bone = tonumber(GetUserInput("Enter name of bone:"))
   end
 
   if bone == nil or bone == "" then
